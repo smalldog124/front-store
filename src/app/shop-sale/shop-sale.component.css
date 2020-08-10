@@ -1,0 +1,12 @@
+.mat-sort-header-container {
+  align-items: center;
+}
+
+#search-box {
+  width: 200px;
+  height: 20px;
+}
+#amount-box {
+  width: 80px;
+  height: 20px;
+}
