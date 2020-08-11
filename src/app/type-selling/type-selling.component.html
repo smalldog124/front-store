@@ -1,5 +1,4 @@
-
-<nav>
-    <button class="button" routerLink="/shop-sale"> Shop for Sale(ขายหน้าร้าน) </button>
-    <a class="button" routerLink="/type-selling" routerLinkActive="active"> Wholesale(ขายส่ง)</a>
-</nav>
+<mat-button-toggle-group name="typeselling" aria-label="Font Style">
+    <mat-button-toggle value="shop-sale" routerLink="/shop-sale"> Shop for Sale(ขายหน้าร้าน) </mat-button-toggle>
+    <mat-button-toggle value="wholesele" routerLink="/wholesale" routerLinkActive="active"> Wholesale(ขายส่ง) </mat-button-toggle>
+</mat-button-toggle-group>

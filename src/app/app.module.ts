@@ -6,11 +6,18 @@ import { AppComponent } from './app.component';
 import { TypeSellingComponent } from './type-selling/type-selling.component';
 import { ShopSaleComponent } from './shop-sale/shop-sale.component';
 import { MatSortModule } from '@angular/material/sort';
-import {MatIconModule} from '@angular/material/icon'; 
+import {MatIconModule} from '@angular/material/icon';
+import { WholesaleComponent } from './wholesale/wholesale.component'; 
+import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatRadioModule} from '@angular/material/radio'; 
+import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
 
 const material = [
   MatSortModule,
-  MatIconModule
+  MatIconModule,
+  MatGridListModule,
+  MatRadioModule,
+  MatButtonToggleModule
 ];
 
 @NgModule({
@@ -18,6 +25,7 @@ const material = [
     AppComponent,
     TypeSellingComponent,
     ShopSaleComponent,
+    WholesaleComponent,
     
   ],
   imports: [

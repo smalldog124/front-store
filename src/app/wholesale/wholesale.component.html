@@ -1,0 +1,54 @@
+<div>
+    <label>รหัสสินค้า </label>
+    <input #searchBox id="search-box" autofocus />
+
+    <label>จำนวน </label>
+    <input type="number" id="amount-box" />
+    <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
+</div>
+<table matSort (matSortChange)="sortData($event)">
+    <tr>
+        <th mat-sort-header="name">Dessert (100g)</th>
+        <th mat-sort-header="calories">Calories</th>
+        <th mat-sort-header="fat">Fat (g)</th>
+        <th mat-sort-header="carbs">Carbs (g)</th>
+        <th mat-sort-header="protein">Protein (g)</th>
+    </tr>
+
+    <tr *ngFor="let dessert of sortedData">
+        <td>{{dessert.name}}</td>
+        <td>{{dessert.calories}}</td>
+        <td>{{dessert.fat}}</td>
+        <td>{{dessert.carbs}}</td>
+        <td>{{dessert.protein}}</td>
+        <td><mat-icon aria-hidden="false" aria-label="edit icon">edit</mat-icon></td>
+    </tr>
+</table>
+
+<div>
+    <h2>รายชื่อร้านค้า</h2>
+    <mat-grid-list cols="4" rowHeight="3:1">
+        <mat-grid-tile>
+            <mat-grid-list cols="4">
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="1">พี่จุ๋ม</mat-radio-button>
+                    <mat-radio-button value="2">ใย่พวย</mat-radio-button>
+                    <mat-radio-button value="2">กท ม9</mat-radio-button>
+                    <mat-radio-button value="2">แสงทอง</mat-radio-button>
+                    <mat-radio-button value="2">แม่ใย่ใค</mat-radio-button>
+                    <mat-radio-button value="2">ใย่บัวบาน</mat-radio-button>
+                    <mat-radio-button value="2">พ่อชัย</mat-radio-button>
+                    <mat-radio-button value="2">กท ม2</mat-radio-button>
+                    <mat-radio-button value="2">เจ้นก</mat-radio-button>
+                </mat-radio-group>
+            </mat-grid-list>
+        </mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+    </mat-grid-list>
+</div>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
