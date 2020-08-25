@@ -1,27 +1,29 @@
 <div>
   <label>รหัสสินค้า </label>
-  <input #searchBox id="search-box" autofocus />
+  <input #searchBox id="search-box" #search_box autofocus required />
 
   <label>จำนวน </label>
-  <input type="number" id="amount-box" value="1" />
-  <button mat-button id="add-to-basket" type="submit">Go</button>
+  <input type="number" id="amount-box" value="1" #quantity_box/>
+  <button mat-button id="add-to-basket" type="submit" (click)="addToBasket(search_box.value,quantity_box.value)">Go</button>
   <mat-icon aria-hidden="false" aria-label="printer icon" >printer</mat-icon>
 </div>
-<table matSort (matSortChange)="sortData($event)">
+<table matSort>
   <tr>
-    <th mat-sort-header="name">Dessert (100g)</th>
-    <th mat-sort-header="calories">Calories</th>
-    <th mat-sort-header="fat">Fat (g)</th>
-    <th mat-sort-header="carbs">Carbs (g)</th>
-    <th mat-sort-header="protein">Protein (g)</th>
+    <th mat-sort-header="quanty">จำนวน</th>
+    <th mat-sort-header="name">รายการ</th>
+    <th mat-sort-header="unit_price">หน่วยละ</th>
+    <th mat-sort-header="amount">จำนวนเงิน</th>
   </tr>
 
-  <tr *ngFor="let dessert of sortedData">
+  <tr *ngFor="let dessert of products">
+    <td>{{dessert.quantity}}</td>
     <td>{{dessert.name}}</td>
-    <td>{{dessert.calories}}</td>
-    <td>{{dessert.fat}}</td>
-    <td>{{dessert.carbs}}</td>
-    <td>{{dessert.protein}}</td>
+    <td>{{dessert.unit_price}}</td>
+    <td>{{dessert.amount}}</td>
+  </tr>
+  <tr>
+    <td>รวม</td>
+    <td>{{total_price}}</td>
   </tr>
 </table>
 
