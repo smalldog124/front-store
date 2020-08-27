@@ -1,0 +1,6 @@
+{
+  "/api/product": {
+    "target": "http://localhost:5200",
+    "secure": false
+  }
+}
