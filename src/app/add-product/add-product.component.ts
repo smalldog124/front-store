@@ -16,15 +16,7 @@ export class AddProductComponent implements OnInit {
   constructor(private productService: ProductService) { }
   ELEMENT_DATA: Observable<Product[]>;
   ngOnInit(): void {
-    this.productService.getAll().subscribe(
-      (data:Product[]) => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
-      },
-      (error)=>{
-        this.errorText = "call api product fail";
-      }
-    )
+    this.getProduct()
   }
 
   errorText: string
@@ -41,10 +33,24 @@ export class AddProductComponent implements OnInit {
     this.productService.newProduct(newProduct).subscribe(
       (data) => {
         this.errorText = "";
+        this.getProduct()
       },
       (error) => {
         this.errorText = "call api product fail";
       })
+      this.addProductForm.reset();
+  }
+
+  getProduct(){
+    this.productService.getAll().subscribe(
+      (data:Product[]) => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
+      },
+      (error)=>{
+        this.errorText = "call api product fail";
+      }
+    )
   }
 
   displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'quantity'];
