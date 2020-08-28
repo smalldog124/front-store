@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 export interface Product {
   name: string;
   barcode: string;
-  front_store_price: number;
-  wholesale_price: number;
+  front_store_price: string;
+  wholesale_price: string;
   quantity: number;
 }
 

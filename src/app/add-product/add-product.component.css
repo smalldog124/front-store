@@ -1,7 +1,15 @@
 table {
     width: 100%;
-  }
+}
   
-  th.mat-sort-header-sorted {
+th.mat-sort-header-sorted {
     color: black;
-  }
+}
+
+.formAddProduct{
+  display: flex;
+  justify-content: center;
+}
+input{
+  width: 20%;
+}

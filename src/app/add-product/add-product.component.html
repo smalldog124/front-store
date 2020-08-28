@@ -1,61 +1,67 @@
-<form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
-    <label>
-        เลขบาร์โค้ด:
-        <input type="text" formControlName="barcode">
-    </label>
-    <label>
-        ชื่อสินค้า:
-        <input type="text" formControlName="name">
-    </label>
-    <label>
-        ราคาหน้าร้าน:
-        <input type="number" formControlName="front_store_price">
-    </label>
-    <label>
-        ราคาขายส่ง:
-        <input type="number" formControlName="wholesale_price">
-    </label>
-    <label>
+<div class="container formAddProduct">
+  <div class="row">
+    <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+      <div class="col-sm">
+        <label>
+          เลขบาร์โค้ด:
+          <input type="text" id="barcode" formControlName="barcode" autofocus>
+        </label>
+        <label>
+          ชื่อสินค้า:
+          <input type="text" id="name" formControlName="name">
+        </label>
+      </div>
+      <div class="col-sm">
+        <label>
+          ราคาหน้าร้าน:
+          <input type="text" id="front_store_price" formControlName="front_store_price">
+        </label>
+        <label>
+          ราคาขายส่ง:
+          <input type="text" id="wholesale_price" formControlName="wholesale_price">
+        </label>
+      </div>
+      <label>
         จำนวน:
-        <input type="number" formControlName="quantity">
-    </label>
-    <button type="submit" [disabled]="!addProductForm.valid">บันทึก</button>
-</form>
-<p>{{errorText}}</p>
-
+        <input type="number" id="quantity" formControlName="quantity">
+      </label>
+      <button type="submit" id="submit_add_product" [disabled]="!addProductForm.valid">บันทึก</button>
+    </form>
+    <p>{{errorText}}</p>
+  </div>
+</div>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-    <!-- Barcode Column -->
-    <ng-container matColumnDef="barcode">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> เลขบาร์โค้ด </th>
-      <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
-    </ng-container>
-  
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
-    <!-- Front Store Price Column -->
-    <ng-container matColumnDef="front_store_price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ราคาหน้าร้าน </th>
-      <td mat-cell *matCellDef="let element"> {{element.front_store_price}} </td>
-    </ng-container>
-  
-    <!-- wholesale Price Column -->
-    <ng-container matColumnDef="wholesale_price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ราคาขายส่ง </th>
-      <td mat-cell *matCellDef="let element"> {{element.wholesale_price}} </td>
-    </ng-container>
+  <!-- Barcode Column -->
+  <ng-container matColumnDef="barcode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> เลขบาร์โค้ด </th>
+    <td mat-cell *matCellDef="let element"> {{element.barcode}} </td>
+  </ng-container>
 
-    <!-- Quantity Price Column -->
-    <ng-container matColumnDef="quantity">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </th>
-        <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-      </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ชื่อสินค้า </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Front Store Price Column -->
+  <ng-container matColumnDef="front_store_price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ราคาหน้าร้าน </th>
+    <td mat-cell *matCellDef="let element"> {{element.front_store_price}} </td>
+  </ng-container>
+
+  <!-- wholesale Price Column -->
+  <ng-container matColumnDef="wholesale_price">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ราคาขายส่ง </th>
+    <td mat-cell *matCellDef="let element"> {{element.wholesale_price}} </td>
+  </ng-container>
+
+  <!-- Quantity Price Column -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> จำนวน </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
