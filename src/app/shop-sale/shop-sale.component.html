@@ -1,11 +1,16 @@
 <div>
-  <label>รหัสสินค้า </label>
-  <input #searchBox id="search-box" #search_box autofocus required />
-
-  <label>จำนวน </label>
-  <input type="number" id="amount-box" value="1" #quantity_box/>
-  <button mat-button id="add-to-basket" type="submit" (click)="addToBasket(search_box.value,quantity_box.value)">Go</button>
-  <mat-icon aria-hidden="false" aria-label="printer icon" >printer</mat-icon>
+  <form [formGroup]="addBasketForm" (ngSubmit)="addToBasket()">
+    <label>
+      รหัสสินค้า
+      <input id="barcode" formControlName="barcode" autofocus />
+    </label>
+    <label>
+      จำนวน
+      <input type="number" id="quantity" formControlName="quantity" value="1" required/>
+    </label>
+    <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
+  </form>
+  <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
 </div>
 <table matSort>
   <tr>

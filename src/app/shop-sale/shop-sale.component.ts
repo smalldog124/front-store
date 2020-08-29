@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketService } from '../basket.service';
+import { BasketService, Product } from '../basket.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
-export interface Product {
-  quantity: number;
-  name: string;
-  unit_price: number;
-  amount: number;
-}
 
 @Component({
   selector: 'app-shop-sale',
@@ -15,18 +10,22 @@ export interface Product {
 })
 export class ShopSaleComponent implements OnInit {
   products: Product[];
-  total_price: number;
 
   constructor(private basketService: BasketService) { }
 
   ngOnInit(): void {
+    this.addBasketForm.patchValue({ quantity: 1 });
   }
 
-  addToBasket(barcode: string,quantity_box: string) {
-    console.log(barcode,quantity_box)
-    this.basketService.addToBasket().subscribe((data: any) => {
-      this.products = data.product;
-      this.total_price = data.total_price;
-    })
+  addBasketForm = new FormGroup({
+    barcode: new FormControl(''),
+    quantity: new FormControl(''),
+  });
+
+  addToBasket() {
+    this.basketService.addToCart(this.addBasketForm.value);
+    this.products = this.basketService.getItems();
+    this.addBasketForm.reset();
+    this.addBasketForm.patchValue({ quantity: 1 });
   }
 }
