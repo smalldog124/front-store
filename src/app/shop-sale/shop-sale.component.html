@@ -6,7 +6,7 @@
     </label>
     <label>
       จำนวน
-      <input type="number" id="quantity" formControlName="quantity" value="1" required/>
+      <input type="number" id="quantity" formControlName="quantity" value="1" required />
     </label>
     <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
   </form>
@@ -16,15 +16,18 @@
   <tr>
     <th mat-sort-header="quanty">จำนวน</th>
     <th mat-sort-header="name">รายการ</th>
-    <th mat-sort-header="unit_price">หน่วยละ</th>
+    <th mat-sort-header="front_store_price">หน่วยละ</th>
     <th mat-sort-header="amount">จำนวนเงิน</th>
   </tr>
 
   <tr *ngFor="let dessert of products">
     <td>{{dessert.quantity}}</td>
     <td>{{dessert.name}}</td>
-    <td>{{dessert.unit_price}}</td>
+    <td>{{dessert.front_store_price}}</td>
     <td>{{dessert.amount}}</td>
+    <td>
+      <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(dessert.id)">delete</mat-icon>
+    </td>
   </tr>
   <tr>
     <td>รวม</td>

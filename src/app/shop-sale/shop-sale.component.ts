@@ -10,6 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class ShopSaleComponent implements OnInit {
   products: Product[];
+  total_price: number = 200;
 
   constructor(private basketService: BasketService) { }
 
@@ -27,5 +28,9 @@ export class ShopSaleComponent implements OnInit {
     this.products = this.basketService.getItems();
     this.addBasketForm.reset();
     this.addBasketForm.patchValue({ quantity: 1 });
+  }
+  removeItem(id:number){
+    this.basketService.removeItem(id);
+    this.products = this.basketService.getItems();
   }
 }
