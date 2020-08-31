@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProductService, Product } from '../product.service';
 import { MatSort } from '@angular/material/sort';
@@ -27,7 +27,7 @@ export class AddProductComponent implements OnInit {
     wholesale_price: new FormControl(''),
     quantity: new FormControl(''),
   })
-
+  @ViewChild("barcode") barcodeField: ElementRef;
   onSubmit() {
     const newProduct = this.addProductForm.value
     this.productService.newProduct(newProduct).subscribe(
@@ -39,6 +39,7 @@ export class AddProductComponent implements OnInit {
         this.errorText = "call api product fail";
       })
       this.addProductForm.reset();
+      this.barcodeField.nativeElement.focus();
   }
 
   getProduct(){

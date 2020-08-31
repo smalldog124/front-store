@@ -1,10 +1,10 @@
 <div class="container formAddProduct">
   <div class="row">
-    <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="addProductForm">
       <div class="col-sm">
         <label>
           เลขบาร์โค้ด:
-          <input type="text" id="barcode" formControlName="barcode" autofocus>
+          <input type="text" id="barcode" formControlName="barcode" #barcode autofocus>
         </label>
         <label>
           ชื่อสินค้า:
@@ -25,7 +25,7 @@
         จำนวน:
         <input type="number" id="quantity" formControlName="quantity">
       </label>
-      <button type="submit" id="submit_add_product" [disabled]="!addProductForm.valid">บันทึก</button>
+      <button type="button" id="submit_add_product" [disabled]="!addProductForm.valid" (click)="onSubmit()">บันทึก</button>
     </form>
     <p>{{errorText}}</p>
   </div>
