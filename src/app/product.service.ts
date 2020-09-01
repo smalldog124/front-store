@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 export interface Product {
+  id:number;
   name: string;
   barcode: string;
   front_store_price: string;
@@ -22,5 +23,9 @@ export class ProductService {
   
   public getAll(){
     return this.httpClient.get<Product[]>(this.API_SERVER);
+  }
+
+  public getByBracode(barcode:string){
+    return this.httpClient.get<Product>(`${this.API_SERVER}/${barcode}`);
   }
 }
