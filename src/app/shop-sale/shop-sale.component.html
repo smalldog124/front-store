@@ -20,11 +20,11 @@
     <th mat-sort-header="amount">จำนวนเงิน</th>
   </tr>
 
-  <tr *ngFor="let dessert of products">
+  <tr *ngFor="let dessert of basket">
     <td>{{dessert.quantity}}</td>
     <td>{{dessert.name}}</td>
     <td>{{dessert.front_store_price}}</td>
-    <td>{{dessert.amount}}</td>
+    <td>{{dessert.front_store_amount}}</td>
     <td>
       <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(dessert.id)">delete</mat-icon>
     </td>

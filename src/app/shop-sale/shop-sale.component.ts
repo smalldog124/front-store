@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketService, Product } from '../basket.service';
+import { BasketService, } from '../basket.service';
+import { ProductService } from '../product.service'
 import { FormGroup, FormControl } from '@angular/forms';
 
 
@@ -9,10 +10,10 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./shop-sale.component.css']
 })
 export class ShopSaleComponent implements OnInit {
-  products: Product[];
-  total_price: number = 0;
+  basket: any[];
+  total_price: number;
 
-  constructor(private basketService: BasketService) { }
+  constructor(private basketService: BasketService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.addBasketForm.patchValue({ quantity: 1 });
@@ -24,14 +25,20 @@ export class ShopSaleComponent implements OnInit {
   });
 
   addToBasket() {
-    this.basketService.addToCart(this.addBasketForm.value);
-    this.products = this.basketService.getItems();
-    this.total_price = this.basketService.getTotalPrice(this.products);
+    const dataForm = this.addBasketForm.value;
+    this.productService.getByBracode(dataForm.barcode).subscribe((data) => {
+      this.basketService.addToCart(data, dataForm.quantity);
+      this.basket = this.basketService.getItems();
+      this.total_price = this.basketService.getTotalPrice().front_store_total;
+    }, (error) => {
+      console.log('not fuond product!');
+    });
     this.addBasketForm.reset();
     this.addBasketForm.patchValue({ quantity: 1 });
   }
-  removeItem(id:number){
+  removeItem(id: number) {
     this.basketService.removeItem(id);
-    this.products = this.basketService.getItems();
+    this.basket = this.basketService.getItems();
+    this.total_price = this.basketService.getTotalPrice().front_store_total;
   }
 }
