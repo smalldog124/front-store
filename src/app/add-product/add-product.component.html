@@ -22,6 +22,10 @@
         </label>
       </div>
       <label>
+        หน่วย:
+        <input type="text" id="unit_type" formControlName="unit_type">
+      </label>
+      <label>
         จำนวน:
         <input type="number" id="quantity" formControlName="quantity">
       </label>
@@ -54,6 +58,12 @@
   <ng-container matColumnDef="wholesale_price">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> ราคาขายส่ง </th>
     <td mat-cell *matCellDef="let element"> {{element.wholesale_price}} </td>
+  </ng-container>
+
+  <!-- Unit Type Price Column -->
+  <ng-container matColumnDef="unit_type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> หน่วย </th>
+    <td mat-cell *matCellDef="let element"> {{element.unit_type}} </td>
   </ng-container>
 
   <!-- Quantity Price Column -->

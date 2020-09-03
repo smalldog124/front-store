@@ -27,6 +27,7 @@ export class AddProductComponent implements OnInit {
     front_store_price: new FormControl(''),
     wholesale_price: new FormControl(''),
     quantity: new FormControl(''),
+    unit_type: new FormControl(''),
   })
   @ViewChild("barcode") barcodeField: ElementRef;
   onSubmit() {
@@ -55,7 +56,7 @@ export class AddProductComponent implements OnInit {
     )
   }
 
-  displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'quantity'];
+  displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'unit_type','quantity'];
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
