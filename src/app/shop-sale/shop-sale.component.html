@@ -26,7 +26,9 @@
     <td>{{dessert.front_store_price}}</td>
     <td>{{dessert.front_store_amount}}</td>
     <td>
-      <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(dessert.id)">delete</mat-icon>
+      <a>
+        <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(dessert.id)">delete</mat-icon>
+      </a>
     </td>
   </tr>
   <tr>
