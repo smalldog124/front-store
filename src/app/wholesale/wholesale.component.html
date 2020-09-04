@@ -1,29 +1,44 @@
 <div>
-    <label>รหัสสินค้า </label>
-    <input #searchBox id="search-box" autofocus />
-
-    <label>จำนวน </label>
-    <input type="number" id="amount-box" />
+    <form [formGroup]="addBasketForm" (ngSubmit)="addToBasket()">
+        <label>
+            รหัสสินค้า
+            <input id="barcode" formControlName="barcode" autofocus />
+        </label>
+        <label>
+            จำนวน
+            <input type="number" id="quantity" formControlName="quantity" value="1" required />
+        </label>
+        <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
+    </form>
     <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
 </div>
-<table matSort (matSortChange)="sortData($event)">
+<table matSort>
     <tr>
-        <th mat-sort-header="name">Dessert (100g)</th>
-        <th mat-sort-header="calories">Calories</th>
-        <th mat-sort-header="fat">Fat (g)</th>
-        <th mat-sort-header="carbs">Carbs (g)</th>
-        <th mat-sort-header="protein">Protein (g)</th>
+        <th mat-sort-header="quanty">จำนวน</th>
+        <th mat-sort-header="name">รายการ</th>
+        <th mat-sort-header="front_store_price">หน่วยละ</th>
+        <th mat-sort-header="amount">จำนวนเงิน</th>
     </tr>
 
-    <tr *ngFor="let dessert of sortedData">
+    <tr *ngFor="let dessert of basket">
+        <td>{{dessert.quantity}}</td>
         <td>{{dessert.name}}</td>
-        <td>{{dessert.calories}}</td>
-        <td>{{dessert.fat}}</td>
-        <td>{{dessert.carbs}}</td>
-        <td>{{dessert.protein}}</td>
-        <td><mat-icon aria-hidden="false" aria-label="edit icon">edit</mat-icon></td>
+        <td>{{dessert.wholesale_price}}</td>
+        <td>{{dessert.wholesale_amount}}</td>
+        <td>
+            <a>
+                <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(dessert.id)">delete
+                </mat-icon>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>รวมสุทธิ</td>
+        <td>{{total_price}}</td>
     </tr>
 </table>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div>
     <h2>รายชื่อร้านค้า</h2>
