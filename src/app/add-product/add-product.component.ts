@@ -4,6 +4,7 @@ import { ProductService, Product } from '../product.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class AddProductComponent implements OnInit {
   dataSource: any
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
   
   ELEMENT_DATA: Observable<Product[]>;
   ngOnInit(): void {
@@ -56,7 +57,11 @@ export class AddProductComponent implements OnInit {
     )
   }
 
-  displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'unit_type','quantity'];
+  editProduct(barcode: number){
+    this.router.navigate(['/edit-product',barcode]);
+  }
+
+  displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'unit_type','quantity','option'];
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 

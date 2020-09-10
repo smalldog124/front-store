@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPrintModule } from 'ngx-print';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const material = [
   MatSortModule,
@@ -34,6 +35,7 @@ const material = [
     ShopSaleComponent,
     WholesaleComponent,
     AddProductComponent,
+    EditProductComponent,
 
   ],
   imports: [
