@@ -16,6 +16,8 @@ export class ShopSaleComponent implements OnInit {
   constructor(private basketService: BasketService, private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.basket = this.basketService.getItems();
+    this.total_price = this.basketService.getTotalPrice().front_store_total;
     this.addBasketForm.patchValue({ quantity: 1 });
   }
 

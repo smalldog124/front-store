@@ -13,10 +13,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTableModule } from '@angular/material/table';
-import { SlipTemplateComponent } from './slip-template/slip-template.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPrintModule } from 'ngx-print';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const material = [
   MatSortModule,
@@ -33,8 +34,8 @@ const material = [
     TypeSellingComponent,
     ShopSaleComponent,
     WholesaleComponent,
-    SlipTemplateComponent,
     AddProductComponent,
+    EditProductComponent,
 
   ],
   imports: [
@@ -44,6 +45,7 @@ const material = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPrintModule,
     material
   ],
   providers: [],

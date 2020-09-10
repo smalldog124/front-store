@@ -1,0 +1,40 @@
+<div class="container formAddProduct">
+    <div class="row">
+        <p>{{errorText}}</p>
+        <form [formGroup]="editProductForm">
+            <div class="col-sm">
+                <label>
+                    ID:
+                    <input type="number" id="product_id" formControlName="product_id">
+                </label>
+                <label>
+                    เลขบาร์โค้ด:
+                    <input type="text" id="barcode" formControlName="barcode" #barcode>
+                </label>
+                <label>
+                    ชื่อสินค้า:
+                    <input type="text" id="name" formControlName="name">
+                </label>
+            </div>
+            <div class="col-sm">
+                <label>
+                    ราคาหน้าร้าน:
+                    <input type="text" id="front_store_price" formControlName="front_store_price">
+                </label>
+                <label>
+                    ราคาขายส่ง:
+                    <input type="text" id="wholesale_price" formControlName="wholesale_price">
+                </label>
+            </div>
+            <label>
+                หน่วย:
+                <input type="text" id="unit_type" formControlName="unit_type">
+            </label>
+            <label>
+                จำนวน:
+                <input type="number" id="quantity" formControlName="quantity">
+            </label>
+            <button type="button" id="submit_add_product" (click)="updateProduct()" [disabled]="!editProductForm.valid">บันทึก</button>
+        </form>
+    </div>
+</div>
