@@ -8,6 +8,7 @@ export interface Product {
   front_store_price: string;
   wholesale_price: string;
   quantity: number;
+  unit_type: string;
 }
 
 @Injectable({
@@ -18,7 +19,11 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   public newProduct(product: any) {
-    return this.httpClient.post(this.API_SERVER, product)
+    return this.httpClient.post(this.API_SERVER, product);
+  }
+
+  public updateProduct(product: any){
+    return this.httpClient.put(this.API_SERVER,product);
   }
   
   public getAll(){
