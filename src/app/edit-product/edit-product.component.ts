@@ -58,7 +58,7 @@ export class EditProductComponent implements OnInit {
   updateProduct() {
     const p = this.editProductForm.value;
     const product: Product = {
-      id: p.id,
+      id: this.productID,
       name: p.name,
       barcode: p.barcode,
       front_store_price: p.front_store_price.toString(),

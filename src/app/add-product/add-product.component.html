@@ -78,7 +78,8 @@
     <td mat-cell *matCellDef="let element">
       <a (click)="editProduct(element.barcode)">
         <mat-icon aria-hidden="false" aria-label="edit icon">edit</mat-icon>
-      </a >{{element.barcode}} </td>
+      </a>
+    </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
