@@ -13,3 +13,8 @@ th.mat-sort-header-sorted {
 input{
   width: 20%;
 }
+
+#error_text{
+  background-color: red;
+  color: white;
+}

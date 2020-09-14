@@ -39,7 +39,11 @@ export class AddProductComponent implements OnInit {
         this.getProduct()
       },
       (error) => {
-        this.errorText = "call api product fail";
+        if (error.status == 405){
+          this.errorText = "ข้อมูลมีในระบบแล้ว";
+        }else{
+          this.errorText = "บันทึกข้อมูลไม่สำเร็จ";
+        }
       })
       this.addProductForm.reset();
       this.barcodeField.nativeElement.focus();
@@ -52,7 +56,7 @@ export class AddProductComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       (error)=>{
-        this.errorText = "call api product fail";
+        this.errorText = "ถึงข้อมูลไม่สำเร็จ";
       }
     )
   }

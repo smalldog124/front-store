@@ -32,7 +32,7 @@
       <button type="button" id="submit_add_product" [disabled]="!addProductForm.valid"
         (click)="onSubmit()">บันทึก</button>
     </form>
-    <p>{{errorText}}</p>
+    <p id="error_text">{{errorText}}</p>
   </div>
 </div>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
