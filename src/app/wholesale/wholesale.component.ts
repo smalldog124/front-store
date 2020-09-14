@@ -12,6 +12,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class WholesaleComponent implements OnInit {
   basket: any[];
   total_price: number;
+  errorText: string;
 
   constructor(private basketService: BasketService, private productService: ProductService) { }
 
@@ -33,7 +34,12 @@ export class WholesaleComponent implements OnInit {
       this.basket = this.basketService.getItems();
       this.total_price = this.basketService.getTotalPrice().front_store_total;
     }, (error) => {
-      console.log('not fuond product!');
+      if (error.status == 405) {
+        this.errorText = "สินค้ายังไม่มีในระบบ กรุณาเพิ่มสินค้า";
+        console.log('not fuond product!');
+      } else {
+        console.log('find error product!');
+      }
     });
     this.addBasketForm.reset();
     this.addBasketForm.patchValue({ quantity: 1 });
