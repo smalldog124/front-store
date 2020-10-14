@@ -18,6 +18,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const material = [
   MatSortModule,
@@ -25,7 +26,8 @@ const material = [
   MatGridListModule,
   MatRadioModule,
   MatButtonToggleModule,
-  MatTableModule
+  MatTableModule,
+  MatPaginatorModule
 ];
 
 @NgModule({

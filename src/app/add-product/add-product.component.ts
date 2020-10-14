@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -31,6 +32,13 @@ export class AddProductComponent implements OnInit {
     unit_type: new FormControl(''),
   })
   @ViewChild("barcode") barcodeField: ElementRef;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   onSubmit() {
     const newProduct = this.addProductForm.value
     this.productService.newProduct(newProduct).subscribe(
@@ -66,7 +74,4 @@ export class AddProductComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'unit_type','quantity','option'];
-
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
 }
