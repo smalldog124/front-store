@@ -11,8 +11,12 @@
         <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
 
     </form>
-    <button id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
+    <button  id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
         <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
+    </button>
+    &nbsp;&nbsp;
+    <button (click)="clearCart()">
+        <mat-icon aria-hidden="false" aria-label="printer icon">remove_shopping_cart</mat-icon>
     </button>
     <p id="errot_text">{{errorText}}</p>
 </div>

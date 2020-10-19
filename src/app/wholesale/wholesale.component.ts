@@ -50,4 +50,8 @@ export class WholesaleComponent implements OnInit {
     this.basket = this.basketService.getItems();
     this.total_price = this.basketService.getTotalPrice().front_store_total;
   }
+  clearCart() {
+    this.basket = this.basketService.clearCart();
+    this.total_price = 0;
+  }
 }
