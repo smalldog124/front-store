@@ -33,6 +33,7 @@ export class WholesaleComponent implements OnInit {
       this.basketService.addToCart(data, dataForm.quantity);
       this.basket = this.basketService.getItems();
       this.total_price = this.basketService.getTotalPrice().front_store_total;
+      this.errorText = "";
     }, (error) => {
       if (error.status == 405) {
         this.errorText = "สินค้ายังไม่มีในระบบ กรุณาเพิ่มสินค้า";

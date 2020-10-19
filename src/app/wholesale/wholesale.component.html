@@ -9,14 +9,18 @@
             <input type="number" id="quantity" formControlName="quantity" value="1" required />
         </label>
         <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
+
     </form>
-    <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
+    <button id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
+        <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
+    </button>
     <p id="errot_text">{{errorText}}</p>
 </div>
 <table matSort>
     <tr>
         <th mat-sort-header="quanty">จำนวน</th>
         <th mat-sort-header="name">รายการ</th>
+        <th mat-sort-header="unit">หน่วย</th>
         <th mat-sort-header="front_store_price">หน่วยละ</th>
         <th mat-sort-header="amount">จำนวนเงิน</th>
     </tr>
@@ -24,6 +28,7 @@
     <tr *ngFor="let dessert of basket">
         <td>{{dessert.quantity}}</td>
         <td>{{dessert.name}}</td>
+        <td>{{dessert.unit_type}}</td>
         <td>{{dessert.wholesale_price}}</td>
         <td>{{dessert.wholesale_amount}}</td>
         <td>
@@ -33,15 +38,45 @@
             </a>
         </td>
     </tr>
-    <tr>
-        <td>รวมสุทธิ</td>
-        <td>{{total_price}}</td>
-    </tr>
 </table>
+<div class="foot-bill">
+    <b>รวมสุทธิ:</b> {{total_price | number:'.2'}} บาท
+</div>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div id="bill_wholesale_template">
+    <div class="head-bill">
+        <H3>ร้าน โตโต้พาณิชย์</H3>
+        42 หมู่ 3 ต.หนองข่า อ.ปทุมราขวงศา จ.อำนาจเจริญ 37110 <br>
+        เลขประจำตัวผู้เสียภาษี: 3340600078282 <br>
+        โทร: 088-7634646
+    </div>
+    <div class="body-bill">
+        <table matSort>
+            <tr>
+                <th mat-sort-header="quanty">จำนวน</th>
+                <th mat-sort-header="name">รายการ</th>
+                <th mat-sort-header="unit">หน่วย</th>
+                <th mat-sort-header="front_store_price">หน่วยละ</th>
+                <th mat-sort-header="amount">จำนวนเงิน</th>
+            </tr>
 
-<div>
+            <tr *ngFor="let dessert of basket">
+                <td>{{dessert.quantity}}</td>
+                <td>{{dessert.name}}</td>
+                <td>{{dessert.unit_type}}</td>
+                <td>{{dessert.wholesale_price}}</td>
+                <td>{{dessert.wholesale_amount}}</td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="foot-bill">
+        <b>รวมสุทธิ:</b> {{total_price | number:'.2'}} บาท
+    </div>
+
+</div>
+<div id="member_store">
     <h2>รายชื่อร้านค้า</h2>
     <mat-grid-list cols="4" rowHeight="3:1">
         <mat-grid-tile>

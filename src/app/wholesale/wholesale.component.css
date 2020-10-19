@@ -13,3 +13,31 @@
   mat-grid-tile {
     background: #e3f0f5;
   }
+
+  #member_store{
+    display: none;
+  }
+
+  #bill_wholesale_template{
+    display: none;
+  }
+
+  table{
+    width: 100%;
+  }
+
+  .head-bill{
+    text-align: center;
+    margin-bottom: 3%;
+  }
+
+  .body-bill{
+    width: 90%;
+    margin: auto;
+  }
+
+  .foot-bill{
+    text-align: right;
+    margin-right: 20%;
+    margin-top: 3%;
+  }
