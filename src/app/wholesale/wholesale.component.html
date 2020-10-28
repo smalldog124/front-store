@@ -11,7 +11,7 @@
         <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
 
     </form>
-    <button  id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
+    <button id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
         <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
     </button>
     &nbsp;&nbsp;
@@ -20,30 +20,44 @@
     </button>
     <p id="errot_text">{{errorText}}</p>
 </div>
-<table matSort>
-    <tr>
-        <th mat-sort-header="quanty">จำนวน</th>
-        <th mat-sort-header="name">รายการ</th>
-        <th mat-sort-header="unit">หน่วย</th>
-        <th mat-sort-header="front_store_price">หน่วยละ</th>
-        <th mat-sort-header="amount">จำนวนเงิน</th>
-    </tr>
-
-    <tr *ngFor="let dessert of basket">
-        <td>{{dessert.quantity}}</td>
-        <td>{{dessert.name}}</td>
-        <td>{{dessert.unit_type}}</td>
-        <td>{{dessert.wholesale_price}}</td>
-        <td>{{dessert.wholesale_amount}}</td>
-        <td>
+<table mat-table [dataSource]="basket" class="mat-elevation-z8">
+    <ng-container matColumnDef="no">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td mat-cell *matCellDef="let index = index"> {{index+1}}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>รายการ</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>จำนวน</th>
+        <td mat-cell *matCellDef="let element">{{element.quantity}}</td>
+    </ng-container>
+    <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef class="td-conten-center">หน่วย</th>
+        <td mat-cell *matCellDef="let element" class="td-conten-center">{{element.unit_type}}</td>
+    </ng-container>
+    <ng-container matColumnDef="wholesale_price">
+        <th mat-header-cell *matHeaderCellDef class="th-rigth">ราคา/หน่วย</th>
+        <td mat-cell *matCellDef="let element" class="th-rigth">{{element.wholesale_price | number:'.2'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef class="th-rigth">รวมเงิน</th>
+        <td mat-cell *matCellDef="let element" class="th-rigth">{{element.wholesale_amount | number:'.2'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="choose">
+        <th mat-header-cell *matHeaderCellDef class="th-rigth">ตัวเลือก</th>
+        <td mat-cell *matCellDef="let element" class="th-rigth">
             <a>
-                <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(dessert.id)">delete
+                <mat-icon aria-hidden="false" aria-label="delete icon" (click)="removeItem(element.id)">delete
                 </mat-icon>
             </a>
         </td>
-    </tr>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<div class="foot-bill">
+<div class="total-price">
     <b>รวมสุทธิ:</b> {{total_price | number:'.2'}} บาท
 </div>
 
@@ -56,27 +70,39 @@
         โทร: 088-7634646
     </div>
     <div class="body-bill">
-        <table matSort>
-            <tr>
-                <th mat-sort-header="quanty">จำนวน</th>
-                <th mat-sort-header="name">รายการ</th>
-                <th mat-sort-header="unit">หน่วย</th>
-                <th mat-sort-header="front_store_price">หน่วยละ</th>
-                <th mat-sort-header="amount">จำนวนเงิน</th>
-            </tr>
-
-            <tr *ngFor="let dessert of basket">
-                <td>{{dessert.quantity}}</td>
-                <td>{{dessert.name}}</td>
-                <td>{{dessert.unit_type}}</td>
-                <td>{{dessert.wholesale_price}}</td>
-                <td>{{dessert.wholesale_amount}}</td>
-            </tr>
+        <table mat-table [dataSource]="basket" class="mat-elevation-z8">
+            <ng-container matColumnDef="no">
+                <th mat-header-cell *matHeaderCellDef>#</th>
+                <td mat-cell *matCellDef="let index = index"> {{index+1}}</td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>รายการ</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef>จำนวน</th>
+                <td mat-cell *matCellDef="let element" style="padding-left: 3px;">{{element.quantity}}</td>
+            </ng-container>
+            <ng-container matColumnDef="unit">
+                <th mat-header-cell *matHeaderCellDef>หน่วย</th>
+                <td mat-cell *matCellDef="let element">{{element.unit_type}}</td>
+            </ng-container>
+            <ng-container matColumnDef="wholesale_price">
+                <th mat-header-cell *matHeaderCellDef class="th-rigth">ราคา/หน่วย</th>
+                <td mat-cell *matCellDef="let element" class="th-rigth">{{element.wholesale_price | number:'.2'}}</td>
+            </ng-container>
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef class="th-rigth">รวมเงิน</th>
+                <td mat-cell *matCellDef="let element" class="th-rigth">{{element.wholesale_amount | number:'.2'}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsBill"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsBill;"></tr>
         </table>
-
     </div>
     <div class="foot-bill">
-        <b>รวมสุทธิ:</b> {{total_price | number:'.2'}} บาท
+        <b>รวมสุทธิ:</b> {{total_price | number:'.2'}} บาท<br>
+        <b>ยอดชำระ:</b> ................... บาท<br>
+        <b>เงินทอน:</b> .................... บาท
     </div>
 
 </div>

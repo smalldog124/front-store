@@ -1,14 +1,5 @@
-.mat-sort-header-container {
-    align-items: center;
-  }
-  
-  #search-box {
-    width: 200px;
-    height: 20px;
-  }
-  #amount-box {
-    width: 80px;
-    height: 20px;
+.td-conten-center {
+    text-align: center;
   }
   mat-grid-tile {
     background: #e3f0f5;
@@ -32,12 +23,22 @@
   }
 
   .body-bill{
-    width: 90%;
     margin: auto;
   }
 
   .foot-bill{
     text-align: right;
+    margin-top: 3%;
+    bottom: 5%;
+    right: 5%;
+    position: absolute;
+  }
+
+  .total-price{
+    text-align: right;
     margin-right: 10%;
     margin-top: 3%;
+  }
+  .th-rigth{
+    text-align: right;
   }

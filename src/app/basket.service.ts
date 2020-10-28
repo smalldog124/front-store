@@ -2,6 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductService } from './product.service';
 
+export interface Basket {
+  id: number;
+  barcode: string;
+  name: string;
+  quantity: number;
+  unit_type: string;
+  wholesale_price: number;
+  wholesale_amount: number;
+  front_store_amount: number;
+  front_store_price: number;
+  image:string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +21,9 @@ import { ProductService } from './product.service';
 
 export class BasketService {
   constructor(private httpClient: HttpClient, private producService: ProductService) { }
-  items = [];
+  items: Basket[] = [];
 
-  addToCart(product: any,qty: number) {
+  addToCart(product: any, qty: number) {
     let indexItem = this.items.findIndex(({ barcode }) => barcode === product.barcode);
     if (indexItem === -1) {
       product.quantity = qty;
@@ -24,11 +36,11 @@ export class BasketService {
       const calWholsale = product.wholesale_price * this.items[indexItem].quantity;
       this.items[indexItem].front_store_amount = calFront;
       this.items[indexItem].wholesale_amount = calWholsale;
-    }
+    }    
   }
 
   getItems() {
-    return this.items;
+    return this.items = [...this.items];
   }
 
   clearCart() {
@@ -50,6 +62,6 @@ export class BasketService {
       wholesale_total += item.wholesale_amount;
     });
 
-    return {front_store_total,wholesale_total};
+    return { front_store_total, wholesale_total };
   }
 }
