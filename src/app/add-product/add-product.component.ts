@@ -3,7 +3,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ProductService, Product } from '../product.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 
@@ -14,10 +13,9 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-  dataSource: any
+  dataSource: MatTableDataSource<Product>
   constructor(private productService: ProductService, private router: Router) { }
   
-  ELEMENT_DATA: Observable<Product[]>;
   ngOnInit(): void {
     this.getProduct()
   }
@@ -36,9 +34,6 @@ export class AddProductComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
   onSubmit() {
     const newProduct = this.addProductForm.value
     this.productService.newProduct(newProduct).subscribe(
@@ -61,16 +56,26 @@ export class AddProductComponent implements OnInit {
     this.productService.getAll().subscribe(
       (data:Product[]) => {
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
       (error)=>{
-        this.errorText = "ถึงข้อมูลไม่สำเร็จ";
+        this.errorText = "ดึงข้อมูลไม่สำเร็จ";
       }
     )
   }
 
   editProduct(barcode: number){
     this.router.navigate(['/edit-product',barcode]);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   displayedColumns: string[] = ['barcode', 'name', 'front_store_price', 'wholesale_price', 'unit_type','quantity','option'];
