@@ -1,5 +1,5 @@
-<div>
-    <form [formGroup]="addBasketForm" (ngSubmit)="addToBasket()">
+<div class="content">
+    <form [formGroup]="addBasketForm" (ngSubmit)="scanBarcode()">
         <label>
             รหัสสินค้า
             <input id="barcode" formControlName="barcode" autofocus />
@@ -11,15 +11,57 @@
         <button mat-button id="add-to-basket" type="submit" [disabled]="!addBasketForm.valid">Go</button>
 
     </form>
-    <button id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
-        <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
-    </button>
-    &nbsp;&nbsp;
-    <button (click)="clearCart()">
-        <mat-icon aria-hidden="false" aria-label="printer icon">remove_shopping_cart</mat-icon>
-    </button>
+    <div class="margin">
+        <label>ค้นหา: </label>
+        <input (keyup)="search($event)" #input>
+    </div>
+    <div>
+        <button id="printer_icon" [useExistingCss]="true" printSectionId="bill_wholesale_template" ngxPrint>
+            <mat-icon aria-hidden="false" aria-label="printer icon">printer</mat-icon>
+        </button>&nbsp;
+        <button (click)="clearCart()">
+            <mat-icon aria-hidden="false" aria-label="printer icon">remove_shopping_cart</mat-icon>
+        </button>
+    </div>
     <p id="errot_text">{{errorText}}</p>
 </div>
+<div class="mat-elevation-z8" id="resual_search" *ngIf="dataSource !== undefined">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="no">
+            <th mat-header-cell *matHeaderCellDef>#</th>
+            <td mat-cell *matCellDef="let index = index"> {{index+1}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>ชื่อสินค้า</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="front_store_price">
+            <th mat-header-cell *matHeaderCellDef>ราคาหน้าร้าน</th>
+            <td mat-cell *matCellDef="let element">{{element.front_store_price}}</td>
+        </ng-container>
+        <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef class="td-conten-center">หน่วย</th>
+            <td mat-cell *matCellDef="let element" class="td-conten-center">{{element.unit_type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="wholesale_price">
+            <th mat-header-cell *matHeaderCellDef class="th-rigth">ราคาส่ง</th>
+            <td mat-cell *matCellDef="let element" class="th-rigth">{{element.wholesale_price | number:'.2'}}</td>
+        </ng-container>
+        <ng-container matColumnDef="choose">
+            <th mat-header-cell *matHeaderCellDef class="th-rigth">ตัวเลือก</th>
+            <td mat-cell *matCellDef="let element" class="th-rigth">
+                <a>
+                    <mat-icon aria-hidden="false" aria-label="add icon" (click)="addToBasket(element.barcode,1)">add
+                    </mat-icon>
+                </a>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsSearch"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsSearch;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5"></mat-paginator>
+</div>
+<h1 class="td-conten-center">ใบเสร็จรับเงิน</h1>
 <table mat-table [dataSource]="basket" class="mat-elevation-z8">
     <ng-container matColumnDef="no">
         <th mat-header-cell *matHeaderCellDef>#</th>

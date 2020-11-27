@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 export interface Product {
   id:number;
@@ -16,6 +16,7 @@ export interface Product {
 })
 export class ProductService {
   private API_SERVER = "/api/product"
+  private API_SEARCH = "/api/search"
   constructor(private httpClient: HttpClient) { }
 
   public newProduct(product: any) {
@@ -32,5 +33,13 @@ export class ProductService {
 
   public getByBracode(barcode:string){
     return this.httpClient.get<Product>(`${this.API_SERVER}/${barcode}`);
+  }
+
+  public getByName(text:string){
+    text = text.trim()
+   const options = {
+      params: new HttpParams().set('key',text)
+    };
+    return this.httpClient.get<Product[]>(`${this.API_SEARCH}`,options)
   }
 }

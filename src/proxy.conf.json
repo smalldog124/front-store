@@ -2,5 +2,9 @@
   "/api/product": {
     "target": "http://localhost:5200",
     "secure": false
+  },
+  "/api/search": {
+    "target": "http://localhost:5200",
+    "secure": false
   }
 }
