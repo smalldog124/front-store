@@ -42,7 +42,7 @@ export class WholesaleComponent implements AfterContentInit {
   removeItem(id: number) {
     this.basketService.removeItem(id);
     this.basket = this.basketService.getItems();
-    this.total_price = this.basketService.getTotalPrice().front_store_total;
+    this.total_price = this.basketService.getTotalPrice().wholesale_total;
   }
   clearCart() {
     this.basket = this.basketService.clearCart();
@@ -61,7 +61,6 @@ export class WholesaleComponent implements AfterContentInit {
         this.dataSource = undefined
         return
       }
-      console.log(data);
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -74,7 +73,7 @@ export class WholesaleComponent implements AfterContentInit {
   addToBasket(barcode: string, quantity: number){
     this.productService.getByBracode(barcode).subscribe((data) => {
       this.basketService.addToCart(data, quantity);
-      this.total_price = this.basketService.getTotalPrice().front_store_total;
+      this.total_price = this.basketService.getTotalPrice().wholesale_total;
       this.basket = this.basketService.getItems();
       this.errorText = "";
     }, (error) => {

@@ -20,7 +20,6 @@ export interface Basket {
 })
 
 export class BasketService {
-  constructor(private httpClient: HttpClient, private producService: ProductService) { }
   items: Basket[] = [];
 
   addToCart(product: any, qty: number) {
@@ -54,13 +53,8 @@ export class BasketService {
   }
 
   getTotalPrice() {
-    let front_store_total = 0;
-    let wholesale_total = 0;
-
-    this.items.map(item => {
-      front_store_total += item.front_store_amount;
-      wholesale_total += item.wholesale_amount;
-    });
+    let front_store_total = this.items.reduce((sum, product) => sum+= product.front_store_amount , 0);
+    let wholesale_total = this.items.reduce((sum, product) => sum+= product.wholesale_amount , 0);
 
     return { front_store_total, wholesale_total };
   }
