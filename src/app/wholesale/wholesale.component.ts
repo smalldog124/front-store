@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./wholesale.component.css']
 })
 export class WholesaleComponent implements AfterContentInit {
+  date: number = Date.now()
   basket: Basket[] = [];
   total_price: number;
   errorText: string;

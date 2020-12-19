@@ -29,7 +29,6 @@
   .foot-bill{
     text-align: right;
     margin-top: 3%;
-    bottom: 5%;
     right: 5%;
     position: absolute;
   }
@@ -52,4 +51,9 @@
   }
   .margin{
     margin: 1%;
+  }
+  .date-bill{
+    right: 5%;
+    text-align: right;
+    position: relative;
   }

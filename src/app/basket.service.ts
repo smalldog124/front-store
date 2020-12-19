@@ -28,7 +28,7 @@ export class BasketService {
       product.quantity = qty;
       product.front_store_amount = product.front_store_price * qty;
       product.wholesale_amount = product.wholesale_price * qty;
-      this.items.push(product);
+      this.items.unshift(product);
     } else {
       this.items[indexItem].quantity += qty;
       const calFront = product.front_store_price * this.items[indexItem].quantity;
